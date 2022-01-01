@@ -1,5 +1,5 @@
 # **<p align="center">Ethone SB</p>**
-<p align="center"><img src="https://cdn.discordapp.com/attachments/921254281343041606/923705162101588028/Ethone_Background_Mint.png" height=250 width=250/></p>
+<p align="center"><img src="https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png" height=250 width=250/></p>
 <p align="center">
 <a><img src="https://img.shields.io/badge/Current%20Stars-2-important?style=for-the-badge"/></a> <img src="https://img.shields.io/badge/Made%20Using-Python%20%26%20Skills-green?style=for-the-badge"/></a>
 </p>
