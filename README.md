@@ -25,8 +25,8 @@ Launch *Quick Open*:
 Paste the following command and press `Enter`:
 
 ```shell
-git clone https://github.com/Planet-Sus/Ethone-SB
-cd Documents/Github/Ethone-SB
+git clone https://github.com/Ethone-SB/Ethone-Selfbot.git
+cd Documents/Github/Ethone-Selfbot
 pip install -r requirements.txt
 py main.py
 ```
