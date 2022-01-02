@@ -423,7 +423,9 @@ async def lesbian(et):
 
 
 @Ethone.command()
-async def pfp(et, *, user: discord.User):
+async def pfp(et, *, user: discord.User = None):
+    if not user:
+        user = et.author
     embed = discord.Embed(color=0xD302F4)
     embed.set_author(name="Ethone Selfbot", icon_url=f"")
     embed.add_field(name=("Profile picture"), value=f"`of {user}`", inline=False)
