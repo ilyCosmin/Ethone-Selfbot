@@ -19,7 +19,6 @@ colorevery = 0xD302F4
 cmd = "mode 90, 45"
 os.system(cmd)
 
-ctypes.windll.kernel32.SetConsoleTitleW(f"Ethone | {__v__} | Commands used: {count}")
 
 def print_e(txt):
     time=datetime.now().strftime("%H:%M")
@@ -46,6 +45,9 @@ else:
     print_e("Failed to connect to token in config.json! Please enter a valid one and restart.")
     input("Press enter to exit...")
     os._exit(0)
+
+
+ctypes.windll.kernel32.SetConsoleTitleW(f"Ethone | {__v__} | Commands used: {count} | Prefix: {prefix}")
 
 
 def friends():
@@ -87,6 +89,7 @@ def pfpUrl(id, pfp):
 
 Ethone.remove_command("help") 
 
+
 ## help
 
 
@@ -100,6 +103,7 @@ async def on_command(et):
         pass
     print_e(et.command.name)
     ctypes.windll.kernel32.SetConsoleTitleW(f"Ethone | {__v__} | Commands used: {count}")
+
 
 @Ethone.event
 async def on_command_error(et, error):
@@ -197,6 +201,7 @@ async def help(et, category=None):
         embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
         await et.send(embed=embed, delete_after=delete_timer)
 
+
 ## help
 
 
@@ -247,6 +252,7 @@ async def embed(et, message):
 
 
 #nsfw
+
 
 @Ethone.command()
 async def floydsus(et):
@@ -403,15 +409,9 @@ async def lesbian(et):
 
 #nsfw
 
-#@Ethone.command()
-#async def cloneprofile(et, member: Member = None):
-#    if not member:
-#        member = et.author
-#    with open (f"{member.avatar_url}") as f:
-#        image = f.read()
-#        await Ethone.user.edit(avatar=image)
 
 #image
+
 
 @Ethone.command()
 async def pfp(et, *, user: discord.User):
@@ -519,6 +519,7 @@ async def clyde(et, message):
 
 
 #image
+
 
 @Ethone.command()
 async def realping(et, number: int):
