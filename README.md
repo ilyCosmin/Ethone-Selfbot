@@ -1,7 +1,7 @@
 # **<p align="center">Ethone SB</p>**
 <p align="center"><img src="https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png" height=250 width=250/></p>
 <p align="center">
-<a><img src="https://img.shields.io/github/stars/Ethone-SB/https://github.com/Ethone-SB/Ethone-Selfbot?style=social"/></a> <img src="https://img.shields.io/badge/Made%20Using-Python%20%26%20Skills-green?style=for-the-badge"/></a>
+<a><img src="https://img.shields.io/github/stars/Ethone-SB/Ethone-Selfbot?style=social"/></a> <img src="https://img.shields.io/badge/Made%20Using-Python%20%26%20Skills-green?style=for-the-badge"/></a>
 </p>
 
 
