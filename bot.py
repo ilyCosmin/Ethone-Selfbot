@@ -128,7 +128,7 @@ async def help(et, category=None):
         embed = discord.Embed(color=0xD302F4)
         embed.set_author(name="Ethone Selfbot", icon_url=f"")
         embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
-        embed.description = f"**`GENERAL COMMANDS`**\n`{prefix}help <category>` - returns all commands of that category\n`{prefix}uptime` - return how long the selfbot has been running\n`{prefix}prefix <prefix>` - changes the bot's prefix\n`{prefix}ping` - return the bot's latency\n`{prefix}lockpc` - locking the pc\n`{prefix}shutdown` - shutdown the selfbot"
+        embed.description = f"**`GENERAL COMMANDS`**\n`{prefix}help <category>` - returns all commands of that category\n`{prefix}ping` - return the bot's latency\n`{prefix}lockpc` - locking the pc\n`{prefix}shutdown` - shutdown the selfbot"
         embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
         await et.send(embed=embed, delete_after=delete_timer)
     
