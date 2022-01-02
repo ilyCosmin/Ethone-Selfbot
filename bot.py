@@ -104,7 +104,7 @@ async def on_command(et):
     except:
         pass
     print_e(et.command.name)
-    ctypes.windll.kernel32.SetConsoleTitleW(f"Ethone | {__v__} | Commands used: {count}")
+    ctypes.windll.kernel32.SetConsoleTitleW(f"Ethone | {__v__} | Commands used: {count} | Prefix: {prefix}")
 
 
 @Ethone.event
