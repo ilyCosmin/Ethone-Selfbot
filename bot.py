@@ -10,7 +10,6 @@ import sys
 import os
 from datetime import datetime, timedelta
 from discord.ext import commands
-from datetime import datetime
 from discord import Member
 import asyncio
 import json
