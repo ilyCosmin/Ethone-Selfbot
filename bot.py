@@ -126,7 +126,7 @@ async def help(et, category=None):
     if category is None:
         embed = discord.Embed(color=0xD302F4)
         embed.set_author(name="Ethone Selfbot",
-                         icon_url=f"https://ethone.pro")
+                         icon_url=f"")
         embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
         embed.add_field(name=f"`{prefix}HELP GENERAL`", value="Shows all general commands", inline=False)
         embed.add_field(name=f"`{prefix}HELP ACCOUNT`", value="Shows all account commands", inline=False)
