@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-__v__ = 1.0
+__v__ = 1.1
 count = 0
 import discord
 import random
 import string
+import time
 import sys
 import os
+from datetime import datetime, timedelta
 from discord.ext import commands
 from datetime import datetime
 from discord import Member
@@ -18,6 +20,7 @@ import ctypes
 colorevery = 0xD302F4
 cmd = "mode 90, 45"
 os.system(cmd)
+start = time.time()
 
 
 def print_e(txt):
@@ -705,6 +708,16 @@ async def restart(et):
 @Ethone.command()
 async def ghostping(et, msg):
     await et.message.delete()
+
+
+@Ethone.command()
+async def uptime(et):
+    embed = discord.Embed(color=0xD302F4)
+    embed.set_author(name="Ethone Selfbot",icon_url=f"")
+    embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
+    embed.add_field(name=("Uptime"), value=f"`{str(timedelta(seconds=int(round(time.time() - start))))}`", inline=False)
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    await et.send(embed=embed, delete_after=delete_timer)
 
 # Important!
 Ethone.run(token, bot=False)
