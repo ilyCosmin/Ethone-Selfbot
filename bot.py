@@ -155,7 +155,7 @@ async def help(et, category=None):
         embed = discord.Embed(color=0xD302F4)
         embed.set_author(name="Ethone Selfbot", icon_url=f"")
         embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
-        embed.description = f"**`IMAGE COMMANDS`**\n`{prefix}pfp <@user>` - return profile picture\n`{prefix}userbanner <@user>` - return profile banner\n`{prefix}ytthumbnail <yturl>` - returns high res thumbnail\n`{prefix}slap` - returns slap anime gif\n`{prefix}cuddle` - returns cuddle anime gif\n`{prefix}pat` - returns patpat anime uwu gif\n`{prefix}iphonex <@user>` - puts pfp in iphone\n`{prefix}awooify <@user>` - puts pfp in awooify\n`{prefix}baguette <@user>` - puts pfp in baguette\n`{prefix}cry` - returns cry anime gif\n`{prefix}clyde <message>` - returns clyde with message"
+        embed.description = f"**`IMAGE COMMANDS`**\n`{prefix}pfp <@user>` - return profile picture\n`{prefix}userbanner <@user>` - return profile banner\n`{prefix}ytthumbnail <yturl>` - returns high res thumbnail\n`{prefix}slap` - returns slap anime gif\n`{prefix}cuddle` - returns cuddle anime gif\n`{prefix}feed` - returns feed anime gif\n`{prefix}pat` - returns patpat anime uwu gif\n`{prefix}iphonex <@user>` - puts pfp in iphone\n`{prefix}awooify <@user>` - puts pfp in awooify\n`{prefix}baguette <@user>` - puts pfp in baguette\n`{prefix}cry` - returns cry anime gif\n`{prefix}clyde <message>` - returns clyde with message"
         embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
         await et.send(embed=embed, delete_after=delete_timer)
     
