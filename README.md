@@ -41,9 +41,9 @@ python bot.py
 
 <img src="https://cdn.discordapp.com/attachments/926206753203429468/926995386017669150/unknown.png" width="370px">
 
-### Changelog
 
-<p>sussy</p>
+<h2>V1.2 Changelog</h2>
+<p>uptime, poll, namemc, sbinfo, ytvideo, phcomment, trumptweet, mcachievment, firstmessage, sus, nchannel, spamcategory, createserver</p>
 
 ### Contributers
 
