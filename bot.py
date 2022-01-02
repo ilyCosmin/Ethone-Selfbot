@@ -225,6 +225,7 @@ async def kanye(et):
 
 @Ethone.command()
 async def shutdown(et):
+    et.message.delete()
     sys.exit()
 
 
