@@ -61,7 +61,6 @@ def friends():
 @Ethone.event
 async def on_ready():
     print(pyfade.Fade.Vertical(pyfade.Colors.blue_to_purple, text = f"""
-
                    ███████╗████████╗██╗  ██╗ ██████╗ ███╗   ██╗███████╗                                   
                    ██╔════╝╚══██╔══╝██║  ██║██╔═══██╗████╗  ██║██╔════╝                                   
                    █████╗     ██║   ███████║██║   ██║██╔██╗ ██║█████╗                                     
@@ -73,6 +72,18 @@ async def on_ready():
     print(pyfade.Fade.Horizontal(pyfade.Colors.blue_to_purple, text = f"""└────────────────────────────────────────────────────────────────────────────────────────┘"""))
 
     
+
+def pfpUrl(id, pfp):
+        url = ""
+        if not str(pfp).startswith("http"):
+            if str(pfp).startswith("a_"):
+                url =  f"https://cdn.discordapp.com/avatars/{id}/{pfp}.gif?size=1024"
+            else:
+                url =  f"https://cdn.discordapp.com/avatars/{id}/{pfp}.png?size=1024"
+
+            return url
+        else:
+            return pfp
 
 Ethone.remove_command("help") 
 
@@ -403,14 +414,11 @@ async def lesbian(et):
 #image
 
 @Ethone.command()
-async def pfp(et, member: Member = None):
-    if not member:
-        member = et.author
+async def pfp(et, *, user: discord.User):
     embed = discord.Embed(color=0xD302F4)
-    embed.set_author(name="Ethone Selfbot",
-                        icon_url=f"")
-    embed.add_field(name=("Profile picture"), value=f"`of {member}`", inline=False)
-    embed.set_image(url=member.avatar_url)
+    embed.set_author(name="Ethone Selfbot", icon_url=f"")
+    embed.add_field(name=("Profile picture"), value=f"`of {user}`", inline=False)
+    embed.set_image(url=pfpUrl(user.id, user.avatar))
     embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
     await et.send(embed=embed, delete_after=delete_timer)
 
@@ -699,5 +707,3 @@ async def ghostping(et, msg):
 
 # Important!
 Ethone.run(token, bot=False)
-
-
