@@ -840,7 +840,7 @@ async def sus(et, user: discord.User = None):
     embed = discord.Embed(title="Ethone Selfbot", description=f"`{user} is {random.randrange(0, 100)}% sus`", color=0xD302F4)
     embed.set_thumbnail(url=f"https://cdn.discordapp.com/attachments/927215390415798282/927233675689619496/ffdsff.png")
     embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
-    await et.send(embed=embed)
+    await et.send(embed=embed, delete_after=delete_timer)
 
 
 @Ethone.command()
