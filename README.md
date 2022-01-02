@@ -6,7 +6,7 @@
 
 
 ## Table of contents
-Newest open-source Discord SelfBot with useful commands and easy documentation on how to add your own and change the existing ones.
+Newest open-source Discord Selfbot with useful commands and easy documentation on how to add your own and change the existing ones.
 
 # Documentation/Info
 
