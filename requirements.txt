@@ -1,0 +1,5 @@
+discord
+datetime
+asyncio
+requests
+pyfade
