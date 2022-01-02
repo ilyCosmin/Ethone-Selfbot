@@ -1,18 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-__v__ = 1.1
+__v__ = 1.2
 count = 0
+from aiohttp.helpers import TOKEN
 import discord
 import random
 import string
 import time
 import sys
 import os
+import youtube_dl
 from datetime import datetime, timedelta
+from discord import message
 from discord.ext import commands
 from discord import Member
 import asyncio
 import json
+import psutil
 import requests
 import pyfade
 import ctypes
@@ -20,10 +24,7 @@ colorevery = 0xD302F4
 cmd = "mode 90, 45"
 os.system(cmd)
 start = time.time()
-if os.path.isfile("LICENSE") is True:
-  os.remove("LICENSE")
-if os.path.isfile("README.md") is True:
-  os.remove("README.md")
+
 
 def print_e(txt):
     time=datetime.now().strftime("%H:%M")
@@ -106,24 +107,24 @@ async def on_command(et):
         await et.message.delete()
     except:
         pass
-    print_e(et.command.name)
+    print_e(f"{prefix}{et.command.name}")
     ctypes.windll.kernel32.SetConsoleTitleW(f"Ethone | {__v__} | Commands used: {count} | Prefix: {prefix}")
 
 
 @Ethone.event
 async def on_command_error(et, error):
+    try:
+        await et.message.delete()
+    except:
+        pass
     if isinstance(error, commands.CommandNotFound):
-        try:
-            await et.message.delete()
-        except:
-            pass
+        print_e(f"Unknown command: {error}")
+    elif isinstance(error, commands.CheckFailure):
+        print_e(f"No embed perms")
+    elif isinstance(error, commands.MissingRequiredArgument):
+        print_e(f"Missing arguments: {error}")
     else:
         print_e(f"Error: {error}")
-        try:
-            await et.message.delete()
-        except:
-            pass
-
 
 @Ethone.command()
 async def help(et, category=None):
@@ -148,7 +149,7 @@ async def help(et, category=None):
         embed = discord.Embed(color=0xD302F4)
         embed.set_author(name="Ethone Selfbot", icon_url=f"")
         embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
-        embed.description = f"**`GENERAL COMMANDS`**\n`{prefix}help <category>` - returns all commands of that category\n`{prefix}ping` - return the bot's latency\n`{prefix}lockpc` - locking the pc\n`{prefix}shutdown` - shutdown the selfbot"
+        embed.description = f"**`GENERAL COMMANDS`**\n`{prefix}help <category>` - returns all commands of that category\n`{prefix}ping` - return the bot's latency\n`{prefix}lockpc` - locking the pc\n`{prefix}shutdown` - shutdown the selfbot\n`{prefix}uptime` - returns the bot runtime\n`{prefix}sbinfo` - returns info about the selfbot"
         embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
         await et.send(embed=embed, delete_after=delete_timer)
     
@@ -166,7 +167,7 @@ async def help(et, category=None):
         embed = discord.Embed(color=0xD302F4)
         embed.set_author(name="Ethone Selfbot", icon_url=f"")
         embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
-        embed.description = f"**`TEXT COMMANDS`**\n`{prefix}kanye` - return random kanye west quote\n`{prefix}embed <message>` - return embed with your message"
+        embed.description = f"**`TEXT COMMANDS`**\n`{prefix}kanye` - return random kanye west quote\n`{prefix}embed <message>` - return embed with your message\n`{prefix}firstmessage` - returns link to the first message\n`{prefix}sus <@user>` - returns sussymeter or user"
         embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
         await et.send(embed=embed, delete_after=delete_timer)
     
@@ -175,7 +176,7 @@ async def help(et, category=None):
         embed = discord.Embed(color=0xD302F4)
         embed.set_author(name="Ethone Selfbot", icon_url=f"")
         embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
-        embed.description = f"**`IMAGE COMMANDS`**\n`{prefix}pfp <@user>` - return profile picture\n`{prefix}userbanner <@user>` - return profile banner\n`{prefix}ytthumbnail <yturl>` - returns high res thumbnail\n`{prefix}slap` - returns slap anime gif\n`{prefix}cuddle` - returns cuddle anime gif\n`{prefix}feed` - returns feed anime gif\n`{prefix}pat` - returns patpat anime uwu gif\n`{prefix}iphonex <@user>` - puts pfp in iphone\n`{prefix}awooify <@user>` - puts pfp in awooify\n`{prefix}baguette <@user>` - puts pfp in baguette\n`{prefix}cry` - returns cry anime gif\n`{prefix}clyde <message>` - returns clyde with message"
+        embed.description = f"**`IMAGE COMMANDS`**\n`{prefix}pfp <@user>` - return profile picture\n`{prefix}userbanner <@user>` - return profile banner\n`{prefix}ytthumbnail <yturl>` - returns high res thumbnail\n`{prefix}slap` - returns slap anime gif\n`{prefix}cuddle` - returns cuddle anime gif\n`{prefix}feed` - returns feed anime gif\n`{prefix}pat` - returns patpat anime uwu gif\n`{prefix}iphonex <@user>` - puts pfp in iphone\n`{prefix}awooify <@user>` - puts pfp in awooify\n`{prefix}baguette <@user>` - puts pfp in baguette\n`{prefix}cry` - returns cry anime gif\n`{prefix}clyde <message>` - returns clyde with message\n`{prefix}phcomment <@user> <comment>` - returns pornhub comment\n`{prefix}trumptweet <message>` - returns trumptweet\n`{prefix}mcachievment <message>` - returns minecraft achievment"
         embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
         await et.send(embed=embed, delete_after=delete_timer)
     
@@ -193,7 +194,7 @@ async def help(et, category=None):
         embed = discord.Embed(color=0xD302F4)
         embed.set_author(name="Ethone Selfbot", icon_url=f"")
         embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
-        embed.description = f"**`MISC COMMANDS`**\n`{prefix}newyear <year>` - return countdown till the year you want\n`{prefix}realping <ping>` - return fake ping\n`{prefix}nitrogen <amount>` - return fake nitro codes"
+        embed.description = f"**`MISC COMMANDS`**\n`{prefix}newyear <year>` - return countdown till the year you want\n`{prefix}realping <ping>` - return fake ping\n`{prefix}nitrogen <amount>` - return fake nitro codes\n`{prefix}poll <poll>` - create pall with yes/no\n`{prefix}namemc <name>` - return list of mc names\n`{prefix}ytvideo <link>` - downloads youtube video to folder\n`{prefix}createserver` - creates server"
         embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
         await et.send(embed=embed, delete_after=delete_timer)
     
@@ -202,7 +203,7 @@ async def help(et, category=None):
         embed = discord.Embed(color=0xD302F4)
         embed.set_author(name="Ethone Selfbot", icon_url=f"")
         embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
-        embed.description = f"**`TROLL COMMANDS`**\n`{prefix}typing <seconds>` - typing nothing\n`{prefix}purgehack <number>` - return blank icons\n`{prefix}ghostping <@user>` - ghostping user"
+        embed.description = f"**`TROLL COMMANDS`**\n`{prefix}typing <seconds>` - typing nothing\n`{prefix}purgehack <number>` - return blank icons\n`{prefix}ghostping <@user>` - ghostping user\n`{prefix}nchannel` - deletes and clones the channel\n`{prefix}spamcategory <name> <number>` - create categories "
         embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
         await et.send(embed=embed, delete_after=delete_timer)
 
@@ -721,5 +722,132 @@ async def uptime(et):
     embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
     await et.send(embed=embed, delete_after=delete_timer)
 
+
+@Ethone.command()
+async def poll(et, poll):
+    embed = discord.Embed(color=0xD302F4)
+    embed.set_author(name="Ethone Selfbot",icon_url=f"")
+    embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
+    embed.add_field(name=("Poll"), value=f"{poll}", inline=False)
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    message = await et.send(embed=embed, delete_after=delete_timer)
+    await message.add_reaction("👍")
+    await message.add_reaction("👎")
+
+
+@Ethone.command()
+async def namemc(et, username: str = None):
+    embed = discord.Embed(color=0xD302F4)
+    embed.set_author(name="Ethone Selfbot",icon_url=f"")
+    request = requests.get(f"https://some-random-api.ml/mc?username={username}")
+    data = request.json()
+    history = data["name_history"]
+    for i in range(len(history)):
+        date_mc = history[i]["changedToAt"]
+        embed.add_field(name=history[i]["name"], value=f"`{date_mc}`", inline=False)
+    embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    await et.send(embed=embed, delete_after=delete_timer)
+
+
+@Ethone.command()
+async def phcomment(et, user: discord.User, *, comment):
+    embed = discord.Embed(color=0xD302F4)
+    embed.set_author(name="Ethone Selfbot", icon_url=f"")
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=phcomment&text={comment}&username={user.name}&image={str(user.avatar_url_as(format='png'))}".replace(" ", "%20"))
+    res = r.json()
+    embed.set_image(url=res["message"])
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    await et.send(embed=embed, delete_after=delete_timer)
+
+
+@Ethone.command()
+async def trumptweet(et, *, text):
+    embed = discord.Embed(color=0xD302F4)
+    embed.set_author(name="Ethone Selfbot", icon_url=f"")
+    p = requests.get(f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}")
+    embed.set_image(url=p.json()["message"])
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    await et.send(embed=embed, delete_after=delete_timer)
+
+
+@Ethone.command()
+async def sbinfo(et):
+    global count
+    embed = discord.Embed(color=0xD302F4)
+    embed.set_author(name="Ethone Selfbot",icon_url=f"")
+    embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
+    embed.add_field(name=("Total Commands:"), value=f"`{int(len(Ethone.commands))}`", inline=False)
+    embed.add_field(name=("Commands used in current session:"), value=f"`{count}`", inline=False)
+    embed.add_field(name=("Version:"), value=f"`{__v__}`", inline=False)
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    await et.send(embed=embed, delete_after=delete_timer)
+    
+    
+@Ethone.command()
+async def mcachievment(et, *, text):
+    embed = discord.Embed(color=0xD302F4)
+    embed.set_author(name="Ethone Selfbot", icon_url=f"")
+    embed.set_image(url=f"https://api.iapetus11.me/mc/achievement/{text.replace(' ', '%20')}")
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    await et.send(embed=embed, delete_after=delete_timer)
+
+
+@Ethone.command()
+async def ytvideo(et, youtube_url: str):
+    try:
+        with youtube_dl.YoutubeDL({}) as download:
+            download.download([f"{youtube_url}"])
+        embed = discord.Embed(color=0xD302F4)
+        embed.set_author(name="Ethone Selfbot", icon_url=f"")
+        embed.add_field(name="Success", value="Youtube video has been downloaded!\nCheck your selfbot folder!")
+        embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
+        embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+        await et.send(embed=embed, delete_after=delete_timer)
+    except:
+        embed.set_author(name="Ethone Selfbot", icon_url=f"")
+        embed = discord.Embed(color=0xD302F4)
+        embed.add_field(name="Error", value="Could not download video.")
+        embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
+        embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+        await et.send(embed=embed, delete_after=delete_timer)
+
+
+@Ethone.command()
+async def firstmessage(et, channel: discord.TextChannel = None):
+    channel = channel or et.channel
+    first_message = (await channel.history(limit=1, oldest_first=True).flatten())[0]
+    embed = discord.Embed(title="Ethone Selfbot", description=f"[ First Message ]({first_message.jump_url})", color=0xD302F4)
+    embed.set_thumbnail(url=f"https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png")
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    await et.send(embed=embed, delete_after=delete_timer)
+
+
+@Ethone.command()
+async def nchannel(et, channel: discord.TextChannel = None):
+    channel = channel if channel else et.channel
+    newchannel = await channel.clone()
+    await channel.delete()
+
+
+@Ethone.command()
+async def sus(et, user: discord.User = None):
+    user = user or et.author
+    embed = discord.Embed(title="Ethone Selfbot", description=f"`{user} is {random.randrange(0, 100)}% sus`", color=0xD302F4)
+    embed.set_thumbnail(url=f"https://cdn.discordapp.com/attachments/927215390415798282/927233675689619496/ffdsff.png")
+    embed.set_footer(text=f"{et.author} | Prefix: {prefix}", icon_url=et.author.avatar_url)
+    await et.send(embed=embed)
+
+
+@Ethone.command()
+async def spamcategory(et, name, amount: int):
+    for i in range(amount):
+        await et.guild.create_category(name=name)
+        
+
+@Ethone.command()
+async def createserver(et, server_name="Ethone"):
+    await Ethone.create_guild(name=server_name)
 # Important!
 Ethone.run(token, bot=False)
