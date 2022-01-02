@@ -41,6 +41,10 @@ python bot.py
 
 <img src="https://cdn.discordapp.com/attachments/926206753203429468/926995386017669150/unknown.png" width="370px">
 
+### Changelog
+
+<p>sussy</p>
+
 ### Contributers
 
 - <img src="https://avatars.githubusercontent.com/u/68169550?v=4" width="15px"> [!94#6666](https://github.com/Najuky)
