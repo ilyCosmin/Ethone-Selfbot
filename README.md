@@ -1,7 +1,7 @@
 # **<p align="center">Ethone SB nigger</p>**
 <p align="center"><img src="https://media.discordapp.net/attachments/926206753203429468/926957919877079100/eth.png" height=250 width=250/></p>
 <p align="center">
-<a><img src="https://img.shields.io/badge/Current%20Stars-2-important?style=for-the-badge"/></a> <img src="https://img.shields.io/badge/Made%20Using-Python%20%26%20Skills-green?style=for-the-badge"/></a>
+<a><img src="https://img.shields.io/badge/Current%20Stars-3-important?style=for-the-badge"/></a> <img src="https://img.shields.io/badge/Made%20Using-Python%20%26%20Skills-green?style=for-the-badge"/></a>
 </p>
 
 
