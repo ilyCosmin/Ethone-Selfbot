@@ -24,7 +24,10 @@ colorevery = 0xD302F4
 cmd = "mode 90, 45"
 os.system(cmd)
 start = time.time()
-
+if os.path.isfile("LICENSE") is True:
+  os.remove("LICENSE")
+if os.path.isfile("README.md") is True:
+  os.remove("README.md")
 
 def print_e(txt):
     time=datetime.now().strftime("%H:%M")
