@@ -1,9 +1,0 @@
-{
-    "Main": {
-        "Prefix": ".",
-	    "Delete timer": 60
-    },
-    "Login": {
-        "Token": "insert-token" 
-    }
-}
