@@ -19,6 +19,7 @@ colorevery = 0xD302F4
 cmd = "mode 90, 45"
 os.system(cmd)
 
+ctypes.windll.kernel32.SetConsoleTitleW(f"Ethone | {__v__} | Commands used: {count}")
 
 def print_e(txt):
     time=datetime.now().strftime("%H:%M")
